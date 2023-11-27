@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendador de Ciclismo</title>
+    <!-- Enlace a Bootstrap CDN para estilos -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/10/Dark-Gray-Photos-Free-Download.png'); /* Reemplaza 'tu_wallpaper.jpg' con la ruta de tu imagen de fondo */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #fff; /* Texto en color blanco para mayor visibilidad en el fondo */
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #form-container {
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente para mejorar la legibilidad del formulario */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        /* Estilo para las recomendaciones en un color diferente */
+        #recomendaciones li {
+            color: #000; /* Texto en color negro para que sea visible en el fondo blanco */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div id="form-container" class="col-md-8">
+            <h1 class="text-center">Recomendador de Ciclismo</h1>
+
+            <div class="form-group">
+                <label for="categoria">Selecciona la categoría:</label>
+                <select id="categoria" class="form-control">
+                    <option value="1">Pendientes muy inclinadas</option>
+                    <option value="2">Bajadas</option>
+                    <option value="3">Plano</option>
+                    <option value="4">Pendientes intermedias</option>
+                </select>
+            </div>
+
+            <button onclick="mostrarRecomendaciones()" class="btn btn-primary">Obtener Recomendaciones</button>
+
+            <h3 class="mt-3">Recomendaciones:</h3>
+            <ul id="recomendaciones" class="list-group">
+                <!-- Lista de recomendaciones -->
+            </ul>
+
+            <h3 class="mt-3">Guía de Cadencia de Pedaleo:</h3>
+            <p>Mantener una cadencia óptima (número de pedaladas por minuto) puede mejorar tu rendimiento. Aquí tienes una guía:</p>
+            <ul>
+                <li>Cadencia Baja: 60-80 RPM (subidas empinadas).</li>
+                <li>Cadencia Media: 80-100 RPM (terreno mixto).</li>
+                <li>Cadencia Alta: 100-120 RPM (terreno plano o descensos).</li>
+            </ul>
+
+            <img id="imagen" src="" alt="Fredy113@gmail.com" class="mt-3">
+
+        </div>
+    </div>
+</div>
+
+<!-- Enlace a Bootstrap JS y jQuery desde CDN para funcionalidades adicionales -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function mostrarRecomendaciones() {
+        var categoria = document.getElementById('categoria').value;
+
+        var recomendacionesLista = document.getElementById('recomendaciones');
+        recomendacionesLista.innerHTML = ''; // Limpiar la lista antes de agregar nuevas recomendaciones
+
+        // Obtener el número de cambio, el número de velocidades, el plato y el piñón recomendados
+        var { numeroCambio, numeroVelocidades, platoRecomendado, pinonRecomendado } = obtenerRecomendaciones();
+
+        // Agregar recomendaciones adicionales basadas en el número de cambio, el número de velocidades, el plato y el piñón recomendados
+        recomendacionesLista.innerHTML += '<li class="list-group-item">Número de Cambio Recomendado: ' + numeroCambio + ' de ' + numeroVelocidades + ' velocidades.</li>';
+        
+        // Agregar recomendaciones específicas para cada categoría
+        switch (categoria) {
+            case '1':
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Recomendación para pendientes muy pronunciadas: ';
+                recomendacionesLista.innerHTML += 'Usa el plato 1 y el piñón 1; o entre Piñón 1, 2, 3 según la pendiente.</li>';
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Sugerencia: Realiza cambios graduales para no dañar la cadena.</li>';
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Recomendación para Expertos: ';
+                recomendacionesLista.innerHTML += 'Trata de usar una velocidad baja con una colina inclinada. Una vez que te sientas más seguro con la subida de una colina en bicicleta, aprende la técnica para subirla de forma ahorrativa. Esta técnica requiere que permanezcas sentado y uses una velocidad baja y no confíes en ponerte de pie por mucho tiempo:[6] Respira regularmente y de manera profunda.Sube de forma lenta y gradual en las primeras etapas de la colina. No es una carrera, se trata de ahorrar el uso de energía.Elige una velocidad baja que aún te permita pedalear razonablemente rápido.Siéntate y sostén los bordes exteriores del manubrio. Esto asegurará que tu respiración sea más fácil al abrir el pecho.Una vez que la colina se vuelva mucho más difícil y te des cuenta que ya no hay más velocidades bajas para usar, agarra las manetas de los frenos. Tira de ellos para darte más fuerza al pedalear. Solo ahora ponte de pie brevemente, si es necesario. En este punto, debes saber por intuición que es mejor para ti, ya sea pararte o sentarte en la bicicleta, para ahorrar más uso de tu energía.Mantente concentrado en una subida constante y rítmica, sacando el máximo provecho de cada vuelta de las llantas para empujarte hacia arriba. Este tipo de conducción más lenta pero potente toma tiempo de dominar pero es eficiente y es buena para los viajes más largos, así como cuando se va a un país montañoso por largas distancias. Es mucho menos probable que te canses al usar este método que requiere que te pares al subir colinas.En turnos, toma el camino largo del lado exterior del giro. Puede parecer ilógico, pero perderás menos impulso de esta forma.,Levántate del asiento (sillín) cuando vayas a la cima de la colina. En este punto, usa todo tu peso corporal para ayudarte a empujar con fuerza los pedales. Pedalear levantado requiere mucha más energía que ir sentado, así que no sobreutilices esta técnica; mantenla hasta la última parte de la colina empinada. Las manos deben estar sobre las manetas de los frenos.Cambia la posición del cuerpo al ritmo de las piernas. Mantén la espalda recta y el pecho abierto para ayudarlo a respirar bien.,A medida que subes la colina, agáchate. Esto requiere que mantengas tu cuerpo y codos bajos, pero apuntando ligeramente hacia afuera para mantener el pecho abierto y tener una respiración más fácil y mantener la parte superior del cuerpo relajada, Aprovecha cambios más agresivos para afrontar subidas empinadas.</li>';
+                break;
+            case '2':
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Recomendación para Bajadas: Usa el plato 3 y el piñón 7, 6, 5 para mantener una velocidad cómoda.</li>';
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Sugerencia: Ajusta la velocidad según la pendiente y mantén el control.</li>';
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Recomendación para Expertos: ';
+                recomendacionesLista.innerHTML += 'Te recomiendo también que bajes siempre con algún dedo colocado en la maneta de freno. Ganarás siempre unas décimas en capacidad de reacción ante un bache o una piedra.El freno se debe tocar siempre que se pueda antes de afrontar la curva, cuando la bicicleta está todavía recta y conservas toda tu estabilidad. Tirar de freno en plena curva porque has entrado pasado supone comprar todas los boletos para sufrir una caída. Es importante salir de la curva con velocidad, aunque ello comporte tener que entrar en ella un poco más lento.afrontar siempre la curva con el pedal exterior lo más bajo posible. Ejerciendo al mismo tiempo una ligera presión sobre el mismo que te permita compensar mejor el reparto de pesos. Ataca la curva siempre lo más abierto posible y empieza a cerrarte cuando este empiece a cerrar el ángulo, de modo que la fuerza “g” y la gravedad te expulsen de nuevo hacia fuera.</li>';
+                break;
+            case '3':
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Recomendación para Plano: ';
+                recomendacionesLista.innerHTML += 'Usa el plato 3 y el piñón 6, 7; o el plato 3 y el piñón 7, 6, 5, 4 para un equilibrio entre velocidad y esfuerzo.</li>';
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Sugerencia: Ajusta la velocidad según tu ritmo y mantén una cadencia constante.</li>';
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Recomendación para Expertos: ';
+                recomendacionesLista.innerHTML += 'Experimenta con cambios de velocidad para mantener un ritmo constante en terreno plano.</li>';
+                break;
+            case '4':
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Recomendación para pendientes intermedias: ';
+                recomendacionesLista.innerHTML += 'Usa el plato 1 y el piñón 4, 5, 6, 7; o el plato 2 y el piñón 3, 4, 5; o el plato 3 y el piñón 1, 2, 3 según la pendiente y tu comodidad.</li>';
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Sugerencia: Prueba diferentes combinaciones para encontrar la más eficiente.</li>';
+                recomendacionesLista.innerHTML += '<li class="list-group-item">Recomendación para Expertos: ';
+                recomendacionesLista.innerHTML += 'Utiliza cambios eficientes para afrontar variaciones en el terreno.</li>';
+                break;
+        }
+
+        // Cambiar la imagen según la categoría seleccionada
+        var imagenSrc = '';
+        switch (categoria) {
+            case '1':
+                imagenSrc = '1.jpg';
+                break;
+            case '2':
+                imagenSrc = '2.jpg';
+                break;
+            case '3':
+                imagenSrc = '3.jpg';
+                break;
+            case '4':
+                imagenSrc = '4.jpg';
+                break;
+        }
+
+        // Mostrar la imagen correspondiente
+        document.getElementById('imagen').src = imagenSrc;
+    }
+
+    // Función para obtener el número de cambio, el número de velocidades, el plato y el piñón recomendados
+    function obtenerRecomendaciones() {
+        var numeroVelocidades = 21; // Número total de velocidades en la bicicleta
+        var platos = [1, 2, 3]; // Número de platos en el pedalier
+        var pinones = [1, 2, 3, 4, 5, 6, 7]; // Número de piñones en la rueda trasera
+
+        // Inicializar recomendaciones con valores predeterminados
+        var numeroCambio = 1;
+        var platoRecomendado = platos[0];
+        var pinonRecomendado = pinones[0];
+
+        return { numeroCambio, numeroVelocidades, platoRecomendado, pinonRecomendado };
+    }
+</script>
+
+</body>
+</html>
